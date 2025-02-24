@@ -81,35 +81,44 @@ export function PermissionAIDetails({
     if (!position || !popupRef.current) return;
 
     const popup = popupRef.current;
-    const rect = popup.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
     const viewportWidth = window.innerWidth;
-    const padding = 16;
+    const padding = 8; // Reduced padding to match PermissionSelect
+    const offset = 4; // Small offset from parent
 
-    let { top, left } = position;
-    const maxWidth = Math.min(640, viewportWidth - (padding * 2));
+    // Calculate dimensions
+    const maxWidth = position.width;
     const maxHeight = viewportHeight - (padding * 2);
+    const rect = popup.getBoundingClientRect();
 
-    // Adjust vertical position
+    // Calculate position
+    let top = position.top + offset;
+    let left = position.left;
+
+    // Adjust vertical position if needed
     if (top + rect.height > viewportHeight - padding) {
-      // If popup would overflow bottom, try positioning above
-      if (position.top - rect.height > padding) {
-        top = position.top - rect.height - padding;
+      // If popup would overflow bottom, position above the parent
+      if (position.top - rect.height - offset > padding) {
+        top = position.top - rect.height - offset;
       } else {
         // If not enough space above, center vertically
         top = Math.max(padding, (viewportHeight - rect.height) / 2);
       }
     }
 
-    // Adjust horizontal position
+    // Adjust horizontal position if needed
     if (left + maxWidth > viewportWidth - padding) {
       left = Math.max(padding, viewportWidth - maxWidth - padding);
     }
 
+    // Apply styles
+    popup.style.position = 'fixed';
     popup.style.top = `${top}px`;
     popup.style.left = `${left}px`;
-    popup.style.maxWidth = `${maxWidth}px`;
+    popup.style.width = `${maxWidth}px`;
     popup.style.maxHeight = `${maxHeight}px`;
+    popup.style.transform = `translateY(${offset}px)`;
+    popup.style.zIndex = '50';
   }, [position, showReadPermissionDialog]);
 
   const handleCopyCode = async () => {
@@ -152,7 +161,7 @@ export function PermissionAIDetails({
 
   if (error) {
     return (
-      <div className="fixed bg-white rounded-lg shadow-xl" ref={popupRef}>
+      <div className="fixed bg-white rounded-lg shadow-xl border border-gray-200" ref={popupRef}>
         <div className="p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -179,8 +188,7 @@ export function PermissionAIDetails({
       
       <div 
         ref={popupRef}
-        className="fixed bg-white rounded-lg shadow-xl overflow-hidden"
-        style={{ zIndex: 50 }}
+        className="fixed bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden"
       >
         {/* Header */}
         <div className="px-4 py-3 border-b border-gray-200 bg-gray-50">

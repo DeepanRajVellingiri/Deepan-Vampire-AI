@@ -1,4 +1,4 @@
-import { Shield, HelpCircle, UserCog, LayoutDashboard, Boxes } from 'lucide-react';
+import { Shield, HelpCircle, UserCog, LayoutDashboard, Boxes, Clock } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 export function Navigation() {
@@ -36,6 +36,17 @@ export function Navigation() {
               >
                 <Boxes className="w-4 h-4 mr-1" />
                 Features
+              </Link>
+              <Link
+                to="/timeline"
+                className={`${
+                  isActive('/timeline')
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                <Clock className="w-4 h-4 mr-1" />
+                Timeline
               </Link>
               <Link
                 to="/help"

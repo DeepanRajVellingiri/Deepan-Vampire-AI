@@ -89,7 +89,7 @@ export function UserJourney() {
               </div>
             </div>
           </ExampleScenario>
-            
+
           {/* Scenario 2: Complex Request */}
           <ExampleScenario title="Scenario 2: Request with Additional Requirements">
             <div className="space-y-4">

@@ -6,6 +6,7 @@ import { AdminComponent } from './components/Admin/AdminComponent';
 import { RequestProvider } from './context/RequestContext';
 import { PermissionAIProvider } from './components/AI/PermissionAIProvider';
 import { FeaturesTab } from './components/Features/FeaturesTab';
+import { TimelineTab } from './components/Timeline/TimelineTab';
 import { 
   HelpContent, 
   UserJourney, 
@@ -29,6 +30,7 @@ function App() {
               <Route path="/admin" element={<AdminComponent />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/features" element={<FeaturesTab />} />
+              <Route path="/timeline" element={<TimelineTab />} />
             </Routes>
           </div>
         </Router>
