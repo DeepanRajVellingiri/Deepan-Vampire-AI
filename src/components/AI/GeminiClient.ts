@@ -42,10 +42,7 @@ const client = graph.Client.init({
 };
 
 function sanitizeJsonString(str: string): string {
-  // Remove any markdown code block markers
   str = str.replace(/```json\s*|\s*```/g, '');
-  
-  // Find the first { and last }
   const start = str.indexOf('{');
   const end = str.lastIndexOf('}');
   
@@ -53,7 +50,6 @@ function sanitizeJsonString(str: string): string {
     throw new Error('No valid JSON object found in response');
   }
   
-  // Extract just the JSON object
   return str.slice(start, end + 1);
 }
 
@@ -62,7 +58,6 @@ function validateAndNormalizeResponse(parsedResponse: any): PermissionInfo {
     throw new Error('Invalid response format');
   }
 
-  // Validate and normalize each field with strong type checking
   const validatedResponse: PermissionInfo = {
     useCase: typeof parsedResponse.useCase === 'string' && parsedResponse.useCase.trim()
       ? parsedResponse.useCase
@@ -87,7 +82,6 @@ function validateAndNormalizeResponse(parsedResponse: any): PermissionInfo {
     }
   };
 
-  // Validate and normalize alternativePermission if present
   if (parsedResponse.alternativePermission && 
       typeof parsedResponse.alternativePermission === 'object' &&
       typeof parsedResponse.alternativePermission.name === 'string' &&
@@ -136,14 +130,10 @@ IMPORTANT: Respond ONLY with the JSON object, no additional text or formatting.`
     const text = response.text();
 
     try {
-      // Clean and extract JSON from the response
       const cleanedJson = sanitizeJsonString(text);
       const parsedResponse = JSON.parse(cleanedJson);
-      
-      // Validate and normalize the response
       const validatedResponse = validateAndNormalizeResponse(parsedResponse);
 
-      // Ensure code snippet includes SDK setup if not present
       if (!validatedResponse.codeSnippet.includes('microsoft-graph-client')) {
         validatedResponse.codeSnippet = `// Using @microsoft/microsoft-graph-client
 const graph = require('@microsoft/microsoft-graph-client');
@@ -162,7 +152,6 @@ ${validatedResponse.codeSnippet}`;
       return validatedResponse;
     } catch (error) {
       console.error('Error processing AI response:', error);
-      // Return default info with specific permission name
       return {
         ...defaultPermissionInfo,
         useCase: `The ${permission} permission provides access to specific Microsoft Graph API functionality.`
@@ -170,7 +159,6 @@ ${validatedResponse.codeSnippet}`;
     }
   } catch (error) {
     console.error('Error fetching permission info:', error);
-    // Return default info with specific permission name
     return {
       ...defaultPermissionInfo,
       useCase: `The ${permission} permission provides access to specific Microsoft Graph API functionality.`

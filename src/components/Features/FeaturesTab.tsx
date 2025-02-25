@@ -17,8 +17,10 @@ import {
   Brain,
   MessageSquare,
   TestTube,
-  Rocket
+  Rocket,
+  Layout
 } from 'lucide-react';
+import { ArchitectureDiagram } from './ArchitectureDiagram';
 
 interface FeatureCardProps {
   title: string;
@@ -110,7 +112,7 @@ export function FeaturesTab() {
               Service Architecture
             </h1>
             <p className="text-blue-100">
-              Comprehensive overview of system components and features
+              Comprehensive overview of system components and integrations
             </p>
           </div>
         </div>
@@ -137,6 +139,15 @@ export function FeaturesTab() {
               icon={<Bell className="h-8 w-8 text-blue-600" />}
             />
           </div>
+        </section>
+
+        {/* Technical Architecture Diagram */}
+        <section>
+          <div className="flex items-center gap-3 mb-6">
+            <Layout className="h-6 w-6 text-blue-600" />
+            <h2 className="text-xl font-semibold text-gray-900">Technical Architecture</h2>
+          </div>
+          <ArchitectureDiagram />
         </section>
 
         {/* Architecture Components */}
@@ -219,6 +230,19 @@ export function FeaturesTab() {
                 "Notification preferences",
                 "Event-based triggers",
                 "Notification history"
+              ]}
+            />
+            <ArchitectureComponent
+              title="Azure Key Vault"
+              icon={<Key className="h-6 w-6 text-yellow-600" />}
+              features={[
+                "Secure credential storage",
+                "Certificate management",
+                "Secret rotation",
+                "Access policy management",
+                "Encryption key management",
+                "Audit logging",
+                "Integration with Azure services"
               ]}
             />
           </div>

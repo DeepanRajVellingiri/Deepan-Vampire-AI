@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Check, ChevronDown, Search, X, Lock, AlertCircle } from 'lucide-react';
+import { Check, ChevronDown, Search, X, Lock } from 'lucide-react';
 import { permissions } from '../../data/permissions';
 import { PermissionAIDetails } from '../AI/PermissionAIDetails';
 import type { Permission, SelectedPermission } from './PermissionType';
@@ -45,6 +45,14 @@ export function PermissionSelect({
     }
   }, [isOpen]);
 
+  // Close AI details if the permission is no longer selected
+  useEffect(() => {
+    if (selectedForDetails && !selectedPermissions.some(p => p.name === selectedForDetails)) {
+      setSelectedForDetails(null);
+      setDetailsPosition(null);
+    }
+  }, [selectedPermissions, selectedForDetails]);
+
   const filteredPermissions = permissions.filter(
     (permission) =>
       permission.permission.toLowerCase().includes(search.toLowerCase()) ||
@@ -66,6 +74,11 @@ export function PermissionSelect({
 
     const permission = permissions.find(p => p.permission === permissionName);
     if (permission) {
+      // Close AI details if removing the currently selected permission
+      if (selectedForDetails === permissionName) {
+        setSelectedForDetails(null);
+        setDetailsPosition(null);
+      }
       onSelect({
         type: permission.type as 'Delegated' | 'Application',
         name: permission.permission,
@@ -197,7 +210,13 @@ export function PermissionSelect({
                     } cursor-pointer select-none relative py-2 pl-3 pr-9 ${
                       isLocked ? 'opacity-75' : ''
                     }`}
-                    onClick={(e) => handlePermissionSelect(permission, e)}
+                    onClick={(e) => {
+                      if (isSelected(permission)) {
+                        handleRemovePermission(permission.permission, e);
+                      } else {
+                        handlePermissionSelect(permission, e);
+                      }
+                    }}
                   >
                     <div className="flex items-center">
                       <input
@@ -242,7 +261,7 @@ export function PermissionSelect({
         </div>
       )}
 
-      {selectedForDetails && detailsPosition && (
+      {selectedForDetails && detailsPosition && isSelected({ permission: selectedForDetails }) && (
         <PermissionAIDetails
           permission={selectedForDetails}
           onPermissionChange={handlePermissionChange}

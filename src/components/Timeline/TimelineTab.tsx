@@ -70,407 +70,1183 @@ function generateSprints(): Sprint[] {
 function generateUserStories(sprintNumber: number): UserStory[] {
   const stories: UserStory[] = [];
   
-  // Sprint 1-2: Project Setup and Requirements
-  if (sprintNumber <= 2) {
-    stories.push({
-      id: `US-${sprintNumber}-1`,
-      title: 'Project Infrastructure Setup',
-      description: 'Set up Azure infrastructure and development environment',
-      type: 'Development',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'Azure Entra ID is configured and accessible',
-        'Azure Functions environment is set up and functional',
-        'SQL Database is provisioned and accessible',
-        'Local development environment is configured'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-1-1`,
-          title: 'Configure Azure Entra ID integration',
-          role: 'DevOps',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-1-2`,
-          title: 'Set up Azure Functions and SQL Database',
-          role: 'DevOps',
-          status: 'To Do',
-          estimate: '3d'
-        }
-      ]
-    });
+  switch(sprintNumber) {
+    case 1:
+      // Sprint 1: Project Setup and Initial Infrastructure
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Azure Infrastructure Setup',
+        description: 'Set up core Azure infrastructure components',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Azure Entra ID is configured and accessible',
+          'Azure Functions environment is set up',
+          'Azure SQL Database is provisioned',
+          'Azure Key Vault is configured'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Configure Azure Entra ID',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Set up Azure Functions',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-    stories.push({
-      id: `US-${sprintNumber}-2`,
-      title: 'Infrastructure Testing and Validation',
-      description: 'Verify all infrastructure components are properly configured',
-      type: 'Testing',
-      points: 5,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All Azure services are accessible and responding correctly',
-        'Authentication flow works as expected',
-        'Database connections are secure and performant',
-        'Monitoring and logging are properly configured'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-2-1`,
-          title: 'Test Azure Entra ID configuration',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '2d'
-        },
-        {
-          id: `TASK-${sprintNumber}-2-2`,
-          title: 'Validate database security and performance',
-          role: 'Security Engineer',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
-  }
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Infrastructure Testing',
+        description: 'Test and validate Azure infrastructure setup',
+        type: 'Testing',
+        points: 5,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'All Azure services are accessible',
+          'Authentication flow works correctly',
+          'Database connections are secure',
+          'Key Vault access is working'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Test Azure Entra ID integration',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Validate security configuration',
+            role: 'Security Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
 
-  // Sprint 3-5: Core Features Development
-  else if (sprintNumber <= 5) {
-    stories.push({
-      id: `US-${sprintNumber}-1`,
-      title: 'Permission Management Interface',
-      description: 'Implement core permission selection and management UI',
-      type: 'Development',
-      points: 13,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'Users can select multiple permissions',
-        'Permission details are displayed clearly',
-        'Form validation prevents invalid submissions',
-        'Changes are saved automatically',
-        'UI is responsive and accessible'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-1-1`,
-          title: 'Implement permission selection component',
-          role: 'Frontend Developer',
-          status: 'To Do',
-          estimate: '5d'
-        },
-        {
-          id: `TASK-${sprintNumber}-1-2`,
-          title: 'Integrate Graph API permissions',
-          role: 'Backend Developer',
-          status: 'To Do',
-          estimate: '4d'
-        }
-      ]
-    });
+    case 2:
+      // Sprint 2: Development Environment and Base Components
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Development Environment Setup',
+        description: 'Set up local development environment and base project structure',
+        type: 'Development',
+        points: 5,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'React project with TypeScript is set up',
+          'Development tools are configured',
+          'CI/CD pipeline is established',
+          'Code quality tools are integrated'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Set up React project',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '1d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Configure CI/CD pipeline',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-    stories.push({
-      id: `US-${sprintNumber}-2`,
-      title: 'Permission Interface Testing',
-      description: 'Comprehensive testing of permission management interface',
-      type: 'Testing',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All UI components render correctly',
-        'Form validation works as expected',
-        'API integration tests pass',
-        'Accessibility standards are met',
-        'Performance meets requirements'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-2-1`,
-          title: 'Create UI component tests',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-2-2`,
-          title: 'Perform accessibility testing',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Base Component Development',
+        description: 'Create core UI components and layouts',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Navigation component is implemented',
+          'Layout structure is created',
+          'Base styling is applied',
+          'Component library is integrated'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create navigation component',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement base layouts',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-    stories.push({
-      id: `US-${sprintNumber}-3`,
-      title: 'Approval Workflow Implementation',
-      description: 'Build multi-stage approval workflow system',
-      type: 'Development',
-      points: 13,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'Workflow stages are clearly defined',
-        'Approvers can review and act on requests',
-        'Status updates are reflected in real-time',
-        'Email notifications are sent correctly',
-        'Audit trail is maintained'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-3-1`,
-          title: 'Implement approval workflow logic',
-          role: 'Backend Developer',
-          status: 'To Do',
-          estimate: '4d'
-        },
-        {
-          id: `TASK-${sprintNumber}-3-2`,
-          title: 'Create approval UI components',
-          role: 'Frontend Developer',
-          status: 'To Do',
-          estimate: '3d'
-        }
-      ]
-    });
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Component Testing Setup',
+        description: 'Set up testing framework and initial tests',
+        type: 'Testing',
+        points: 5,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Testing framework is configured',
+          'Component tests are working',
+          'CI integration is complete',
+          'Test coverage reporting is set up'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Configure testing framework',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Write base component tests',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
 
-    stories.push({
-      id: `US-${sprintNumber}-4`,
-      title: 'Approval Workflow Testing',
-      description: 'Test approval workflow functionality',
-      type: 'Testing',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All workflow stages function correctly',
-        'Notifications are delivered properly',
-        'State transitions are handled correctly',
-        'Edge cases are properly handled',
-        'Performance under load meets requirements'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-4-1`,
-          title: 'Create workflow test scenarios',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-4-2`,
-          title: 'Perform load testing',
-          role: 'Performance Engineer',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
-  }
+    case 3:
+      // Sprint 3: Permission Selection Interface
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Permission Selection UI',
+        description: 'Implement permission selection interface',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Users can search and select permissions',
+          'Permission details are displayed',
+          'Selection state is maintained',
+          'UI is responsive and accessible'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Create permission selector',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Implement search functionality',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-  // Sprint 6-8: AI Integration and Advanced Features
-  else if (sprintNumber <= 8) {
-    stories.push({
-      id: `US-${sprintNumber}-1`,
-      title: 'Azure OpenAI Integration',
-      description: 'Implement AI-powered permission suggestions',
-      type: 'Development',
-      points: 13,
-      priority: 'Medium',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'AI service responds within performance targets',
-        'Suggestions are relevant to user context',
-        'Error handling is robust',
-        'Service fallback works correctly'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-1-1`,
-          title: 'Implement AI service integration',
-          role: 'Backend Developer',
-          status: 'To Do',
-          estimate: '4d'
-        },
-        {
-          id: `TASK-${sprintNumber}-1-2`,
-          title: 'Create suggestion UI components',
-          role: 'Frontend Developer',
-          status: 'To Do',
-          estimate: '3d'
-        }
-      ]
-    });
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Permission Data Integration',
+        description: 'Integrate Graph API permission data',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Permission data is loaded correctly',
+          'Data is cached appropriately',
+          'Error handling is implemented',
+          'Performance requirements are met'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Implement data loading',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Set up caching system',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-    stories.push({
-      id: `US-${sprintNumber}-2`,
-      title: 'AI Integration Testing',
-      description: 'Test AI suggestion functionality',
-      type: 'Testing',
-      points: 8,
-      priority: 'Medium',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'AI responses meet accuracy requirements',
-        'Performance meets SLA targets',
-        'Error scenarios are handled gracefully',
-        'Integration points work correctly'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-2-1`,
-          title: 'Test AI response quality',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-2-2`,
-          title: 'Performance testing of AI integration',
-          role: 'Performance Engineer',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
-  }
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Permission Interface Testing',
+        description: 'Test permission selection functionality',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Selection functionality works correctly',
+          'Search results are accurate',
+          'UI is responsive and accessible',
+          'Error states are handled properly'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Test selection functionality',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Perform accessibility testing',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
 
-  // Sprint 9-10: Testing and Quality Assurance
-  else if (sprintNumber <= 10) {
-    stories.push({
-      id: `US-${sprintNumber}-1`,
-      title: 'End-to-End Testing',
-      description: 'Comprehensive system testing',
-      type: 'Testing',
-      points: 13,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All critical paths are tested',
-        'Integration points are verified',
-        'Performance meets requirements',
-        'Security requirements are met'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-1-1`,
-          title: 'Execute end-to-end test cases',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '5d'
-        },
-        {
-          id: `TASK-${sprintNumber}-1-2`,
-          title: 'Security penetration testing',
-          role: 'Security Engineer',
-          status: 'To Do',
-          estimate: '4d'
-        }
-      ]
-    });
+    case 4:
+      // Sprint 4: Approval Workflow Implementation
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Approval Workflow Backend',
+        description: 'Implement approval workflow logic',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Workflow stages are implemented',
+          'State transitions work correctly',
+          'Approver roles are managed',
+          'History is maintained'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Implement workflow engine',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '4d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Create approval handlers',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
 
-    stories.push({
-      id: `US-${sprintNumber}-2`,
-      title: 'Performance Optimization',
-      description: 'Optimize system performance',
-      type: 'Development',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'Response times meet SLA requirements',
-        'Resource usage is optimized',
-        'Caching is implemented correctly',
-        'Database queries are optimized'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-2-1`,
-          title: 'Optimize database queries',
-          role: 'Backend Developer',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-2-2`,
-          title: 'Implement caching',
-          role: 'Backend Developer',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
-  }
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Approval Interface',
+        description: 'Create approval management interface',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Approvers can review requests',
+          'Actions are clearly presented',
+          'Status is updated in real-time',
+          'History is displayed'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create approval UI',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement real-time updates',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
 
-  // Sprint 11-12: Launch Preparation and Go-Live
-  else {
-    stories.push({
-      id: `US-${sprintNumber}-1`,
-      title: 'Production Deployment',
-      description: 'Prepare and execute production deployment',
-      type: 'Development',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All environments are properly configured',
-        'Monitoring is set up and functional',
-        'Backup procedures are in place',
-        'Rollback procedures are documented'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-1-1`,
-          title: 'Configure production environment',
-          role: 'DevOps',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-1-2`,
-          title: 'Set up monitoring and alerts',
-          role: 'DevOps',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Workflow Testing',
+        description: 'Test approval workflow functionality',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Workflow transitions work correctly',
+          'Permissions are properly enforced',
+          'History is accurately maintained',
+          'Edge cases are handled'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Test workflow logic',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Perform security testing',
+            role: 'Security Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
 
-    stories.push({
-      id: `US-${sprintNumber}-2`,
-      title: 'Production Readiness Testing',
-      description: 'Final testing in production-like environment',
-      type: 'Testing',
-      points: 8,
-      priority: 'High',
-      status: 'To Do',
-      acceptanceCriteria: [
-        'All critical paths work in production environment',
-        'Monitoring alerts work correctly',
-        'Backup and restore procedures verified',
-        'Performance meets production requirements'
-      ],
-      tasks: [
-        {
-          id: `TASK-${sprintNumber}-2-1`,
-          title: 'Production environment testing',
-          role: 'QA Engineer',
-          status: 'To Do',
-          estimate: '3d'
-        },
-        {
-          id: `TASK-${sprintNumber}-2-2`,
-          title: 'Disaster recovery testing',
-          role: 'DevOps',
-          status: 'To Do',
-          estimate: '2d'
-        }
-      ]
-    });
+    case 5:
+      // Sprint 5: AI Integration
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Azure OpenAI Integration',
+        description: 'Integrate Azure OpenAI for permission suggestions',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'AI service is properly integrated',
+          'Suggestions are relevant',
+          'Response times meet requirements',
+          'Error handling is robust'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Set up Azure OpenAI client',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Implement suggestion logic',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'AI Suggestion Interface',
+        description: 'Create UI for AI-powered suggestions',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Suggestions are clearly displayed',
+          'Users can accept/reject suggestions',
+          'Loading states are handled',
+          'Errors are properly displayed'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create suggestion UI',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement interaction handlers',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'AI Integration Testing',
+        description: 'Test AI suggestion functionality',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Suggestions are accurate',
+          'Performance meets requirements',
+          'Error handling works correctly',
+          'Edge cases are covered'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Test suggestion accuracy',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Performance testing',
+            role: 'Performance Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 6:
+      // Sprint 6: Notification System
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Notification Backend',
+        description: 'Implement notification system backend',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Notifications are generated correctly',
+          'Different notification types work',
+          'Delivery is reliable',
+          'Templates are flexible'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Create notification engine',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '4d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Implement templates',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Notification Interface',
+        description: 'Create notification management UI',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Notifications are displayed properly',
+          'Users can manage preferences',
+          'Real-time updates work',
+          'History is maintained'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create notification UI',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement preferences',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Notification Testing',
+        description: 'Test notification system',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Notifications are delivered correctly',
+          'Templates render properly',
+          'Preferences are respected',
+          'Performance is acceptable'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Test notification delivery',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Test template rendering',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 7:
+      // Sprint 7: Dashboard and Analytics
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Dashboard Backend',
+        description: 'Implement dashboard data processing',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Data aggregation works correctly',
+          'Metrics are calculated accurately',
+          'Performance is optimized',
+          'Data is cached appropriately'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Implement data aggregation',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '4d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Create metrics engine',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Dashboard Interface',
+        description: 'Create dashboard UI with charts',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Charts display correctly',
+          'Filters work properly',
+          'Data updates in real-time',
+          'UI is responsive'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create dashboard layout',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement charts',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Dashboard Testing',
+        description: 'Test dashboard functionality',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Data is displayed accurately',
+          'Filters work correctly',
+          'Performance is acceptable',
+          'Charts render properly'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Test data accuracy',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Performance testing',
+            role: 'Performance Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 8:
+      // Sprint 8: Security and Compliance
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Security Implementation',
+        description: 'Implement security features and controls',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Authentication is secure',
+          'Authorization works correctly',
+          'Data encryption is implemented',
+          'Audit logging is complete'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Implement security controls',
+            role: 'Security Engineer',
+            status: 'To Do',
+            estimate: '4d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Set up audit logging',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Compliance Features',
+        description: 'Implement compliance-related features',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Compliance reports work',
+          'Data retention policies work',
+          'Privacy controls are implemented',
+          'Documentation is complete'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create compliance reports',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement privacy controls',
+            role: 'Security Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Security Testing',
+        description: 'Comprehensive security testing',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Security controls work',
+          'Vulnerabilities are addressed',
+          'Compliance requirements are met',
+          'Audit logs are accurate'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Security penetration testing',
+            role: 'Security Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Compliance testing',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 9:
+      // Sprint 9: Performance Optimization
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Backend Optimization',
+        description: 'Optimize backend performance',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Response times are improved',
+          'Database queries are optimized',
+          'Caching is effective',
+          'Resource usage is efficient'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Optimize database queries',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '4d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Implement caching',
+            role: 'Backend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Frontend Optimization',
+        description: 'Optimize frontend performance',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Bundle size is reduced',
+          'Loading times are improved',
+          'Rendering is optimized',
+          'Assets are optimized'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Optimize bundle size',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement lazy loading',
+            role: 'Frontend Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Performance Testing',
+        description: 'Comprehensive performance testing',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Performance metrics are met',
+          'Load testing is successful',
+          'Stress testing is complete',
+          'Bottlenecks are identified'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Load testing',
+            role: 'Performance Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Stress testing',
+            role: 'Performance Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 10:
+      // Sprint 10: Documentation and Training
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Technical Documentation',
+        description: 'Create technical documentation',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'API documentation is complete',
+          'Architecture is documented',
+          'Setup guides are created',
+          'Code is well-documented'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Write API documentation',
+            role: 'Technical Writer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Create setup guides',
+            role: 'Technical Writer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'User Documentation',
+        description: 'Create user documentation and guides',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'User guides are complete',
+          'Help content is created',
+          'FAQs are documented',
+          'Video tutorials are created'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Create user guides',
+            role: 'Technical Writer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Record tutorials',
+            role: 'Technical Writer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Documentation Testing',
+        description: 'Test and validate documentation',
+        type: 'Testing',
+        points: 5,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Documentation is accurate',
+          'Links work correctly',
+          'Examples are valid',
+          'Feedback is collected'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Review documentation',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Validate examples',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 11:
+      // Sprint 11: UAT and Bug Fixes
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'User Acceptance Testing',
+        description: 'Conduct UAT with stakeholders',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'UAT environment is ready',
+          'Test scenarios are prepared',
+          'Stakeholders are engaged',
+          'Feedback is documented'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Prepare UAT environment',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Conduct UAT sessions',
+            role: 'Business Analyst',
+            status: 'To Do',
+            estimate: '3d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Bug Fixes and Refinements',
+        description: 'Address UAT feedback and fix issues',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Critical bugs are fixed',
+          'UAT feedback is addressed',
+          'Regression testing is complete',
+          'Performance is verified'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Fix critical issues',
+            role: 'Full Stack Developer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Implement refinements',
+            role: 'Full Stack Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Final Testing Round',
+        description: 'Comprehensive testing of fixes',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'All fixes are verified',
+          'Regression tests pass',
+          'Performance is acceptable',
+          'No critical issues remain'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Verify bug fixes',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Run regression tests',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    case 12:
+      // Sprint 12: Production Deployment
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Production Environment Setup',
+        description: 'Prepare production environment',
+        type: 'Development',
+        points: 13,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Production environment is configured',
+          'Security measures are implemented',
+          'Monitoring is set up',
+          'Backup procedures are tested'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Configure production environment',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '3d'
+          },
+          {
+            id: `TASK-${sprintNumber}-1-2`,
+            title: 'Set up monitoring',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-2`,
+        title: 'Production Deployment',
+        description: 'Deploy application to production',
+        type: 'Development',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Deployment is successful',
+          'Zero-downtime achieved',
+          'Rollback plan is tested',
+          'Production verification complete'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-2-1`,
+            title: 'Execute deployment',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-2-2`,
+            title: 'Verify deployment',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '1d'
+          }
+        ]
+      });
+
+      stories.push({
+        id: `US-${sprintNumber}-3`,
+        title: 'Post-Deployment Testing',
+        description: 'Verify production deployment',
+        type: 'Testing',
+        points: 8,
+        priority: 'High',
+        status: 'To Do',
+        acceptanceCriteria: [
+          'Production functionality works',
+          'Performance is acceptable',
+          'Monitoring is working',
+          'No critical issues exist'
+        ],
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-3-1`,
+            title: 'Production testing',
+            role: 'QA Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          },
+          {
+            id: `TASK-${sprintNumber}-3-2`,
+            title: 'Monitor system health',
+            role: 'DevOps Engineer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
+      break;
+
+    default:
+      // Default empty sprint if number is out of range
+      stories.push({
+        id: `US-${sprintNumber}-1`,
+        title: 'Maintenance and Support',
+        description: 'Ongoing maintenance activities',
+        type: 'Development',
+        points: 5,
+        priority: 'Medium',
+        status: 'To Do',
+        tasks: [
+          {
+            id: `TASK-${sprintNumber}-1-1`,
+            title: 'Regular maintenance',
+            role: 'Developer',
+            status: 'To Do',
+            estimate: '2d'
+          }
+        ]
+      });
   }
 
   return stories;
