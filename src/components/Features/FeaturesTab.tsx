@@ -1,6 +1,5 @@
 import { 
   Database, 
-  Cloud, 
   Key, 
   Code, 
   GitBranch, 
@@ -9,66 +8,22 @@ import {
   Users,
   Workflow,
   Boxes,
-  Cog,
   FileCode,
   GitPullRequest,
   Terminal,
   Bell,
   Brain,
-  MessageSquare,
   TestTube,
   Rocket,
-  Layout
+  Layout,
+  Lock,
+  UserCog,
+  FileText,
+  CheckCircle2,
+  XCircle,
+  AlertTriangle
 } from 'lucide-react';
 import { ArchitectureDiagram } from './ArchitectureDiagram';
-
-interface FeatureCardProps {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-  className?: string;
-}
-
-function FeatureCard({ title, description, icon, className = '' }: FeatureCardProps) {
-  return (
-    <div className={`bg-white rounded-lg shadow-sm border border-gray-200 p-6 ${className}`}>
-      <div className="flex items-start gap-4">
-        <div className="flex-shrink-0">
-          {icon}
-        </div>
-        <div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">{title}</h3>
-          <p className="text-gray-600">{description}</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface ArchitectureComponentProps {
-  title: string;
-  features: string[];
-  icon: React.ReactNode;
-}
-
-function ArchitectureComponent({ title, features, icon }: ArchitectureComponentProps) {
-  return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <div className="flex items-center gap-3 mb-4">
-        {icon}
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-      </div>
-      <ul className="space-y-2">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center gap-2 text-gray-600">
-            <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-            {feature}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 interface StrategyComponentProps {
   title: string;
@@ -119,25 +74,167 @@ export function FeaturesTab() {
       </div>
 
       <div className="space-y-8">
-        {/* Core Features */}
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Core Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <FeatureCard
-              title="Azure Entra ID Authentication"
-              description="Enterprise-grade authentication and authorization with Azure Entra ID, supporting SSO and MFA for secure access control."
-              icon={<Shield className="h-8 w-8 text-blue-600" />}
-            />
-            <FeatureCard
-              title="Azure OpenAI Integration"
-              description="AI-powered permission suggestions and intelligent assistance using Azure OpenAI for enhanced user experience."
-              icon={<Brain className="h-8 w-8 text-blue-600" />}
-            />
-            <FeatureCard
-              title="Rebar Notifications"
-              description="Real-time notifications for permission updates, approvals, and system events using Rebar's notification system."
-              icon={<Bell className="h-8 w-8 text-blue-600" />}
-            />
+        {/* Add new Technical Architecture Flowchart section */}
+        <section className="bg-white rounded-lg shadow-lg p-8">
+          <div className="flex items-center gap-3 mb-6">
+            <Workflow className="h-6 w-6 text-blue-600" />
+            <h2 className="text-xl font-semibold text-gray-900">Technical Architecture Flow</h2>
+          </div>
+
+          <div className="space-y-8">
+            {/* User Perspective */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                <Users className="h-5 w-5 text-blue-600 mr-2" />
+                User Perspective Flow
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Shield className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">1. Authentication</h4>
+                    <p className="text-sm text-gray-600">User authenticates through Azure Entra ID for secure access</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                    <Brain className="h-4 w-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">2. Permission Selection</h4>
+                    <p className="text-sm text-gray-600">Azure OpenAI assists with intelligent permission suggestions and analysis</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                    <Workflow className="h-4 w-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">3. Request Processing</h4>
+                    <p className="text-sm text-gray-600">Azure Functions handle request validation and workflow management</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                    <Bell className="h-4 w-4 text-yellow-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">4. Status Updates</h4>
+                    <p className="text-sm text-gray-600">Real-time notifications through Rebar for request status changes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Admin Perspective */}
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                <UserCog className="h-5 w-5 text-purple-600 mr-2" />
+                Admin Perspective Flow
+              </h3>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                    <FileText className="h-4 w-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">1. Request Review</h4>
+                    <p className="text-sm text-gray-600">Admins review incoming requests with AI-powered insights</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                    <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">2. Approval Process</h4>
+                    <p className="text-sm text-gray-600">Multi-stage approval workflow with security validations</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                    <XCircle className="h-4 w-4 text-red-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">3. Denial Management</h4>
+                    <p className="text-sm text-gray-600">Handle denials with detailed feedback and revision tracking</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                    <Lock className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-gray-900">4. Implementation</h4>
+                    <p className="text-sm text-gray-600">Secure implementation through Azure Key Vault and Graph API</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Security Layer */}
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 rounded-lg p-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
+                <Shield className="h-5 w-5 text-red-600 mr-2" />
+                Security Layer
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                      <Key className="h-4 w-4 text-red-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Azure Key Vault</h4>
+                      <p className="text-sm text-gray-600">Secure storage of credentials and certificates</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+                      <Database className="h-4 w-4 text-orange-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Encrypted Storage</h4>
+                      <p className="text-sm text-gray-600">Data encryption at rest and in transit</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                      <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Audit Logging</h4>
+                      <p className="text-sm text-gray-600">Comprehensive activity tracking and monitoring</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                      <Shield className="h-4 w-4 text-green-600" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-medium text-gray-900">Access Control</h4>
+                      <p className="text-sm text-gray-600">Role-based access control and permissions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -148,104 +245,6 @@ export function FeaturesTab() {
             <h2 className="text-xl font-semibold text-gray-900">Technical Architecture</h2>
           </div>
           <ArchitectureDiagram />
-        </section>
-
-        {/* Architecture Components */}
-        <section>
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Architecture Components</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ArchitectureComponent
-              title="Azure Entra ID"
-              icon={<Users className="h-6 w-6 text-purple-600" />}
-              features={[
-                "Enterprise identity management",
-                "Single sign-on (SSO) capabilities",
-                "Role-based access control (RBAC)",
-                "Multi-factor authentication (MFA)",
-                "Conditional access policies",
-                "User and group management",
-                "Application registration and management"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Azure OpenAI Service"
-              icon={<Brain className="h-6 w-6 text-green-600" />}
-              features={[
-                "Intelligent permission suggestions",
-                "Natural language processing",
-                "Context-aware recommendations",
-                "Security impact analysis",
-                "Permission usage patterns",
-                "Automated documentation generation",
-                "Risk assessment assistance"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Azure Functions"
-              icon={<Cog className="h-6 w-6 text-orange-600" />}
-              features={[
-                "Serverless API endpoints",
-                "Event-driven architecture",
-                "Database operations handling",
-                "Permission validation logic",
-                "Notification triggers",
-                "Approval workflow automation",
-                "Integration with Graph API"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Azure SQL Database"
-              icon={<Database className="h-6 w-6 text-blue-600" />}
-              features={[
-                "Permission request storage",
-                "Approval workflow tracking",
-                "User and role management",
-                "Audit trail logging",
-                "High availability configuration",
-                "Automated backups",
-                "Data encryption at rest"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Microsoft Graph API"
-              icon={<Workflow className="h-6 w-6 text-indigo-600" />}
-              features={[
-                "Application owner details retrieval",
-                "Permission scope validation",
-                "User profile management",
-                "Group membership verification",
-                "Directory role assignment",
-                "Application permission management",
-                "Security group integration"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Rebar Notification System"
-              icon={<Bell className="h-6 w-6 text-yellow-600" />}
-              features={[
-                "Real-time notifications",
-                "Multi-channel delivery",
-                "Custom notification templates",
-                "Delivery status tracking",
-                "Notification preferences",
-                "Event-based triggers",
-                "Notification history"
-              ]}
-            />
-            <ArchitectureComponent
-              title="Azure Key Vault"
-              icon={<Key className="h-6 w-6 text-yellow-600" />}
-              features={[
-                "Secure credential storage",
-                "Certificate management",
-                "Secret rotation",
-                "Access policy management",
-                "Encryption key management",
-                "Audit logging",
-                "Integration with Azure services"
-              ]}
-            />
-          </div>
         </section>
 
         {/* Deployment Strategy */}

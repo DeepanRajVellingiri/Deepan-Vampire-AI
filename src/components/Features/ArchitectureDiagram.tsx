@@ -76,9 +76,18 @@ function ComponentNode({ title, description, icon, color, services, onClick }: C
 }
 
 export function ArchitectureDiagram() {
-  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
+  type ComponentKey = 'auth' | 'ai' | 'functions' | 'database' | 'graph' | 'notifications' | 'vault';
 
-  const components = {
+  const [selectedComponent, setSelectedComponent] = useState<ComponentKey | null>(null);
+
+  const components: Record<ComponentKey, {
+    title: string;
+    description: string;
+    icon: React.ReactNode;
+    color: string;
+    services: string[];
+    flows: string[];
+  }> = {
     auth: {
       title: 'Azure Entra ID',
       description: 'Authentication and authorization service',
